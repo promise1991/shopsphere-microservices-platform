@@ -1,0 +1,24 @@
+replicaCount: 1
+image:
+  repository: api-gateway
+  tag: v1
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 8000
+
+env:
+  PORT: "8000"
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+global:
+  imageRegistry: ""
+  imagePullSecrets: []

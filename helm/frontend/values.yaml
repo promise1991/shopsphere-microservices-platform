@@ -1,0 +1,10 @@
+replicaCount: 1
+image:
+  repository: 293160392232.dkr.ecr.eu-north-1.amazonaws.com/frontend
+  pullPolicy: IfNotPresent
+  tag: "v4"
+service:
+  type: ClusterIP
+  port: 80
+imagePullSecrets:
+  - name: ecr-secret

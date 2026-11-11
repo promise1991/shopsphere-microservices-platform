@@ -1,0 +1,24 @@
+replicaCount: 1
+image:
+  repository: analytics-service
+  tag: v1
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 8011
+
+env:
+  PORT: "8011"
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+global:
+  imageRegistry: ""
+  imagePullSecrets: []

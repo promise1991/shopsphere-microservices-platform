@@ -1,0 +1,12 @@
+global:
+  replicaCount: 1
+  # PROD FLOW: Set this to your ECR registry
+  # e.g. 123456789012.dkr.ecr.eu-west-1.amazonaws.com
+  imageRegistry: ""
+  imageTag: "latest"
+  env: dev
+  imagePullSecrets:
+    - ecr-secret
+
+imagePullSecrets:
+  - name: ecr-secret
