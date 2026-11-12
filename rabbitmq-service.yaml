@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2026-11-12T10:12:41Z"
+  labels:
+    app: rabbitmq
+  name: rabbitmq
+  namespace: microservices
+  resourceVersion: "217016"
+  uid: 9bab91dd-2ac6-470c-a1db-cd70355b4efc
+spec:
+  clusterIP: 10.104.61.162
+  clusterIPs:
+  - 10.104.61.162
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 5672-5672
+    port: 5672
+    protocol: TCP
+    targetPort: 5672
+  - name: 15672-15672
+    port: 15672
+    protocol: TCP
+    targetPort: 15672
+  selector:
+    app: rabbitmq
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

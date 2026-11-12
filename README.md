@@ -305,3 +305,20 @@ aws ecr describe-repositories --region eu-north-1 --query "repositories[].reposi
 ---
 
 Built by learning-by-doing. Teacher mode: I drove the commands, fixed the bugs, and documented them here.
+
+## Bonus: RabbitMQ Async Notifications (Added Nov 2026)
+
+Problem: Order-service called Notification-service directly (Sync). If notification down, order failed even after payment succeeded.
+
+Fix: Added RabbitMQ queue `order_created` (the notebook).
+
+Flow:
+- Order-service publishes `{"order_id":123,"product":"Nike Shoe","price":50000,"email":"..."}` to queue `order_created`
+- Order returns "Payment Successful!" immediately (green box)
+- Notification-service consumes queue later and sends email + delivery timeline
+
+Verified in RabbitMQ Dashboard (http://localhost:15672, user shopsphere):
+- Published test message to `order_created` → Queued: 1
+- Get Message → Payload `{"order_id":123,"product":"Nike Shoe",...}` → 0 remaining
+
+RabbitMQ runs as plain Deployment `rabbitmq:3.13-management` (Bitnami chart image `bitnami/rabbitmq:4.1.3` was manifest unknown, so switched to official image).
